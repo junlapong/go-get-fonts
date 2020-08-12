@@ -56,17 +56,13 @@ func parseFontWeight(str string) error {
 
 func parseFontURL(str string) error {
 
-	var re = regexp.MustCompile(`(?i)url\s*\(\s*(?:\'|")?\s*([^]*?)\s*(?:\'|")?\s*\)\s*?`)
+	var re = regexp.MustCompile(`(?i)(?i)url\s*\(\s*(?:\'|")?\s*([^+]*?)\s*(?:\'|")?\s*\)\s*?`)
 
-	for i, match := range re.FindAllString(str, -1) {
-		fmt.Println(match, "found at index", i)
+	if len(re.FindStringIndex(str)) > 0 {
+		fmt.Println(re.FindString(str), "found at index", re.FindStringIndex(str)[0])
+		fmt.Printf("%#v\n", re.FindStringSubmatch(str))
+		fmt.Printf("%s\n", re.FindStringSubmatch(str)[1])
 	}
-
-	// if len(re.FindStringIndex(str)) > 0 {
-	// 	fmt.Println(re.FindString(str), "found at index", re.FindStringIndex(str)[0])
-	// 	fmt.Printf("%#v\n", re.FindStringSubmatch(str))
-	// 	fmt.Printf("%s\n", re.FindStringSubmatch(str)[1])
-	// }
 
 	return nil
 }
